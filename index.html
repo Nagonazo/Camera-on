@@ -11,18 +11,7 @@
         padding: 0;
         overflow: hidden;
       }
-      .hud-text {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 24px;
-        color: white;
-        background: rgba(0, 0, 0, 0.5);
-        padding: 10px;
-        border-radius: 5px;
-        z-index: 1000;
-      }
+      
       #screenshot-button {
         position: absolute;
         bottom: 20px;
@@ -40,8 +29,6 @@
   <body>
     <!-- スクリーンショットボタン -->
     <button id="screenshot-button">写真を撮る</button>
-
-    <div class="hud-text">ARシーンに背景とオブジェクトを配置</div>
 
     <!-- AR.jsシーン -->
     <a-scene embedded arjs="debugUIEnabled: false">
