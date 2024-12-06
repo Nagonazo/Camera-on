@@ -36,16 +36,15 @@
 
       <a-marker preset="hiro">
 
-        <!-- 雪の結晶の中心部分 -->
-        <a-cylinder position="0 0 0" radius="0.05" height="0.5" color="lightblue"></a-cylinder>
+        <!-- 黄色の星型（星型モデル + 発光エフェクト） -->
+        <a-entity 
+          geometry="primitive: star; radius: 0.5" 
+          material="color: yellow; emissive: yellow; emissiveIntensity: 1"
+          position="0 2 -3" 
+          animation="property: material.emissiveIntensity; to: 2; dir: alternate; dur: 800; loop: true">
+        </a-entity>
 
-        <!-- 雪の結晶の6つの放射状の腕（直線的な円柱） -->
-        <a-cylinder position="0 0.25 0" rotation="0 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
-        <a-cylinder position="0 0.25 0" rotation="60 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
-        <a-cylinder position="0 0.25 0" rotation="120 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
-        <a-cylinder position="0 0.25 0" rotation="180 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
-        <a-cylinder position="0 0.25 0" rotation="240 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
-        <a-cylinder position="0 0.25 0" rotation="300 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
+
         
        </a-marker>
       
