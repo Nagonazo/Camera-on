@@ -36,18 +36,16 @@
 
       <a-marker preset="hiro">
 
+        <!-- 雪の結晶の中心部分 -->
+        <a-cylinder position="0 0 0" radius="0.05" height="0.5" color="lightblue"></a-cylinder>
 
-        <!-- 箱（立方体） -->
-        <a-box position="0 0.5 0" width="1" height="1" depth="1" color="red" material="metalness: 0.5; roughness: 0.2"></a-box>
-
-        <!-- 横リボン（模様付き、光沢あり） -->
-        <a-plane position="0 0.9 0" rotation="0 0 0" width="1" height="0.1" color="yellow"
-                 material="src: url(ribbon-pattern.jpg); metalness: 0.6; roughness: 0.1"></a-plane>
-        
-        <!-- 縦リボン（模様付き、光沢あり） -->
-        <a-plane position="0.9 0.5 0" rotation="90 0 0" width="0.1" height="1" color="yellow"
-                 material="src: url(ribbon-pattern.jpg); metalness: 0.6; roughness: 0.1"></a-plane>
-
+        <!-- 雪の結晶の6つの放射状の腕（直線的な円柱） -->
+        <a-cylinder position="0 0.25 0" rotation="0 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
+        <a-cylinder position="0 0.25 0" rotation="60 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
+        <a-cylinder position="0 0.25 0" rotation="120 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
+        <a-cylinder position="0 0.25 0" rotation="180 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
+        <a-cylinder position="0 0.25 0" rotation="240 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
+        <a-cylinder position="0 0.25 0" rotation="300 0 0" radius="0.03" height="0.5" color="lightblue"></a-cylinder>
         
        </a-marker>
       
