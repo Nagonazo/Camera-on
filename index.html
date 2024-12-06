@@ -1,15 +1,54 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>AR Effects Example</title>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js"></script>
-</head>
-<body style="margin: 0; overflow: hidden;">
-  <a-scene embedded arjs>
-    
-    <!-- 赤い球体（回転エフェクト） -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>AR with Screenshot</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js"></script>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      .hud-text {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 1000;
+      }
+      #screenshot-button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- スクリーンショットボタン -->
+    <button id="screenshot-button">写真を撮る</button>
+
+    <div class="hud-text">ARシーンに背景とオブジェクトを配置</div>
+
+    <!-- AR.jsシーン -->
+    <a-scene embedded arjs="debugUIEnabled: false">
+      <!-- 背景画像 -->
+      <a-sky src="your-background-image.jpg"></a-sky>
+
+      <!-- 赤い球体（回転エフェクト） -->
     <a-sphere 
       color="red" 
       radius="0.5" 
@@ -42,10 +81,24 @@
       position="0 2 -3" 
       animation="property: material.emissiveIntensity; to: 2; dir: alternate; dur: 800; loop: true">
     </a-entity>
+      
+      <!-- カメラ -->
+      <a-entity camera></a-entity>
+    </a-scene>
 
-    <!-- カメラ -->
-    <a-entity camera></a-entity>
-
-  </a-scene>
-</body>
+    <script>
+      // スクリーンショットを撮るボタンのクリックイベント
+      document.getElementById("screenshot-button").addEventListener("click", function () {
+        // A-Frameのシーンからスクリーンショットを撮る
+        var scene = document.querySelector("a-scene");
+        scene.toDataURL('image/png').then(function (dataUrl) {
+          // スクリーンショットが撮れたら画像として保存
+          var link = document.createElement('a');
+          link.href = dataUrl;
+          link.download = 'screenshot.png'; // 保存するファイル名
+          link.click();
+        });
+      });
+    </script>
+  </body>
 </html>
