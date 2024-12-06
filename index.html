@@ -35,18 +35,21 @@
       <!-- 背景画像 -->
 
       <a-marker preset="hiro">
-  <!-- 赤い球体（回転エフェクト） -->
-  <a-sphere color="red" radius="0.5" position="-1 1 -3" animation="property: rotation; to: 0 360 0; loop: true; dur: 2000"></a-sphere>
 
-  <!-- 金色の立方体（拡大縮小エフェクト + メタリック質感） -->
-  <a-box color="gold" position="1 1 -3" scale="1 1 1" material="metalness: 1; roughness: 0.2" animation="property: scale; to: 1.5 1.5 1.5; dir: alternate; dur: 1000; loop: true"></a-box>
 
-  <!-- 緑の円柱（上下動きエフェクト） -->
-  <a-cylinder color="green" radius="0.3" height="1.5" position="0 0.5 -3" animation="property: position; to: 0 1.5 -3; dir: alternate; dur: 1500; loop: true"></a-cylinder>
+        <!-- 箱（立方体） -->
+        <a-box position="0 0.5 0" width="1" height="1" depth="1" color="red" material="metalness: 0.5; roughness: 0.2"></a-box>
 
-  <!-- 黄色の星型（発光エフェクト） -->
-  <a-entity geometry="primitive: star; radius: 0.5" material="color: yellow; emissive: yellow; emissiveIntensity: 1" position="0 2 -3" animation="property: material.emissiveIntensity; to: 2; dir: alternate; dur: 800; loop: true"></a-entity>
-</a-marker>
+        <!-- 横リボン（模様付き、光沢あり） -->
+        <a-plane position="0 0.9 0" rotation="0 0 0" width="1" height="0.1" 
+                 material="src: url(ribbon-pattern.jpg); metalness: 0.6; roughness: 0.1"></a-plane>
+        
+        <!-- 縦リボン（模様付き、光沢あり） -->
+        <a-plane position="0.9 0.5 0" rotation="90 0 0" width="0.1" height="1" 
+                 material="src: url(ribbon-pattern.jpg); metalness: 0.6; roughness: 0.1"></a-plane>
+
+        
+       </a-marker>
       
    
 
