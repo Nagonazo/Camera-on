@@ -22,14 +22,14 @@
           src="box.png" 
           position="0 0 0" 
           rotation="-90 0 0" 
-          width="1.5" 
-          height="1.5">
+          width="5" 
+          height="5">
         </a-plane>
 
         <!-- 光のエフェクト -->
         <a-light 
           type="point" 
-          position="0 0.5 0" 
+          position="0 5.5 0" 
           color="#FFD700" 
           intensity="2" 
           distance="3">
@@ -38,7 +38,7 @@
         <!-- アニメーションで光を点滅させる -->
         <a-animation 
           attribute="light.intensity" 
-          from="0.5" 
+          from="5.5" 
           to="3" 
           dur="1000" 
           direction="alternate" 
