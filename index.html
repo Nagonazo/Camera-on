@@ -1,74 +1,36 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <title>箱から光の演出</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js"></script>
-    <style>
-      body, html {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-    </style>
+    <script>
+      AFRAME.registerComponent('aurora-effect', {
+        tick: function (time) {
+          // 動的な揺らぎを発生させる
+          const material = this.el.getObject3D('mesh').material;
+          const colorShift = Math.sin(time / 1000) * 0.5 + 0.5; // 0～1の範囲で変化
+          material.color.setHSL(colorShift, 1, 0.5); // 色相を変化させる
+          material.opacity = 0.7 + Math.sin(time / 1500) * 0.3; // 透明度も揺らぐ
+        },
+      });
+    </script>
   </head>
   <body>
-   <script>
-  // オーロラ用のカスタムシェーダー
-  AFRAME.registerShader('aurora', {
-    schema: {
-      color1: {type: 'color', default: '#00ff99'},  // オーロラの色1
-      color2: {type: 'color', default: '#0099ff'},  // オーロラの色2
-      opacity: {type: 'number', default: 0.8},     // 透明度
-      time: {type: 'time', is: 'uniform'}          // アニメーション用の時間
-    },
-    vertexShader: `
-      varying vec2 vUV;
-      void main() {
-        vUV = uv; // UV座標を渡す
-        vec4 pos = modelViewMatrix * vec4(position, 1.0);
-        gl_Position = projectionMatrix * pos;
-      }
-    `,
-    fragmentShader: `
-      uniform vec3 color1;
-      uniform vec3 color2;
-      uniform float opacity;
-      uniform float time;
-      varying vec2 vUV;
+    <a-scene embedded arjs>
+      <!-- マーカー -->
+      <a-marker preset="hiro">
+        <!-- オーロラ風の平面 -->
+        <a-plane 
+          width="5" 
+          height="3" 
+          position="0 2 -3" 
+          rotation="-90 0 0"
+          material="color: #00ff99; transparent: true; opacity: 0.7"
+          aurora-effect>
+        </a-plane>
+      </a-marker>
 
-      void main() {
-        // ノイズ風のアニメーションを生成
-        float noise = sin(vUV.y * 10.0 + time * 0.002) * 0.5 + 0.5;
-        vec3 color = mix(color1, color2, noise); // 色を混ぜる
-        float alpha = smoothstep(0.2, 1.0, noise); // 透明度を動的に調整
-        gl_FragColor = vec4(color, alpha * opacity);
-      }
-    `
-  });
-</script>
-
-<a-scene embedded arjs>
-  <!-- マーカー -->
-  <a-marker preset="hiro">
-    <!-- オーロラ表示 -->
-    <a-plane 
-      width="5" 
-      height="3" 
-      position="0 2 -3" 
-      rotation="-90 0 0"
-      material="shader: aurora; color1: #00ff99; color2: #0099ff; opacity: 0.8">
-    </a-plane>
-  </a-marker>
-
-  <!-- カメラ -->
-  <a-entity camera></a-entity>
-</a-scene>
-
-
-
-    
-
+      <!-- カメラ -->
+      <a-entity camera></a-entity>
+    </a-scene>
   </body>
 </html>
