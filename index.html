@@ -3,13 +3,17 @@
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script>
-      AFRAME.registerComponent('aurora-effect', {
+      AFRAME.registerComponent('aurora-animation', {
+        schema: { type: 'float', default: 1 }, // オーロラの動きの速さを調整する
         tick: function (time) {
-          // 動的な揺らぎを発生させる
-          const material = this.el.getObject3D('mesh').material;
-          const colorShift = Math.sin(time / 1000) * 0.5 + 0.5; // 0～1の範囲で変化
-          material.color.setHSL(colorShift, 1, 0.5); // 色相を変化させる
-          material.opacity = 0.7 + Math.sin(time / 1500) * 0.3; // 透明度も揺らぐ
+          const speed = this.data;
+          const ring = this.el.getObject3D('mesh');
+          if (ring) {
+            // 時間ベースでオーロラの動きを変更
+            const wave = Math.sin(time / 1000 * speed) * 0.5 + 0.5; // 0〜1の範囲で変動
+            ring.material.color.setHSL(0.5 + wave * 0.5, 1, 0.5); // 色を動的に変える
+            ring.scale.set(1 + wave * 0.5, 0.1, 1 + wave * 0.5); // スケールを変化させる
+          }
         },
       });
     </script>
@@ -18,15 +22,15 @@
     <a-scene embedded arjs>
       <!-- マーカー -->
       <a-marker preset="hiro">
-        <!-- オーロラ風の平面 -->
-        <a-plane 
-          width="5" 
-          height="3" 
-          position="0 2 -3" 
+        <!-- オーロラ風のリング -->
+        <a-ring 
+          position="0 1.5 0" 
           rotation="-90 0 0"
-          material="color: #00ff99; transparent: true; opacity: 0.7"
-          aurora-effect>
-        </a-plane>
+          radius-inner="0.5" 
+          radius-outer="1.5" 
+          material="color: #0099ff; transparent: true; opacity: 0.7" 
+          aurora-animation="1.5">
+        </a-ring>
       </a-marker>
 
       <!-- カメラ -->
