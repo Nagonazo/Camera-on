@@ -14,40 +14,62 @@
     </style>
   </head>
   <body>
-    <a-scene embedded arjs>
-      <!-- Hiroマーカー -->
-      <a-marker preset="hiro">
-        <!-- 箱の画像 -->
-        <a-plane 
-          src="box.png" 
-          position="0 0 0" 
-          rotation="-90 0 0" 
-          width="10" 
-          height="10">
-        </a-plane>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script>
+  // オーロラ用のカスタムシェーダー
+  AFRAME.registerShader('aurora', {
+    schema: {
+      color1: {type: 'color', default: '#00ff99'},  // オーロラの色1
+      color2: {type: 'color', default: '#0099ff'},  // オーロラの色2
+      opacity: {type: 'number', default: 0.8},     // 透明度
+      time: {type: 'time', is: 'uniform'}          // アニメーション用の時間
+    },
+    vertexShader: `
+      varying vec2 vUV;
+      void main() {
+        vUV = uv; // UV座標を渡す
+        vec4 pos = modelViewMatrix * vec4(position, 1.0);
+        gl_Position = projectionMatrix * pos;
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 color1;
+      uniform vec3 color2;
+      uniform float opacity;
+      uniform float time;
+      varying vec2 vUV;
 
-        <!-- 光のエフェクト -->
-        <a-light 
-          type="point" 
-          position="0 0 0" 
-          color="#FFD700" 
-          intensity="2" 
-          distance="3">
-        </a-light>
+      void main() {
+        // ノイズ風のアニメーションを生成
+        float noise = sin(vUV.y * 10.0 + time * 0.002) * 0.5 + 0.5;
+        vec3 color = mix(color1, color2, noise); // 色を混ぜる
+        float alpha = smoothstep(0.2, 1.0, noise); // 透明度を動的に調整
+        gl_FragColor = vec4(color, alpha * opacity);
+      }
+    `
+  });
+</script>
 
-        <!-- アニメーションで光を点滅させる -->
-        <a-animation 
-          attribute="light.intensity" 
-          from="5.5" 
-          to="3" 
-          dur="1000" 
-          direction="alternate" 
-          repeat="indefinite">
-        </a-animation>
-      </a-marker>
-      
-      <!-- カメラ -->
-      <a-entity camera></a-entity>
-    </a-scene>
+<a-scene embedded arjs>
+  <!-- マーカー -->
+  <a-marker preset="hiro">
+    <!-- オーロラ表示 -->
+    <a-plane 
+      width="5" 
+      height="3" 
+      position="0 2 -3" 
+      rotation="-90 0 0"
+      material="shader: aurora; color1: #00ff99; color2: #0099ff; opacity: 0.8">
+    </a-plane>
+  </a-marker>
+
+  <!-- カメラ -->
+  <a-entity camera></a-entity>
+</a-scene>
+
+
+
+    
+
   </body>
 </html>
