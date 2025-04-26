@@ -9,10 +9,11 @@
   <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs="sourceType: webcam;">
       <a-marker preset="hiro">
+       <a-entity>
         <!-- プレゼントボックスの画像 -->
         <a-image 
           src="./box.png" 
-          position="0 1.5 0" 
+          position="0 1 0" 
           scale="1 1 1"
           rotation="-90 0 0">
         </a-image>
@@ -20,9 +21,10 @@
         <!-- 文字 -->
         <a-entity 
           text="value: メリークリスマス！; color: red; align: center; width: 4;"
-          position="0 2.5 0" 
+          position="0 2 0" 
           look-at="[camera]">
         </a-entity>
+       </a-entity>
       </a-marker>
 
       <a-entity camera></a-entity>
