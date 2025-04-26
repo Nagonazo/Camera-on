@@ -8,24 +8,27 @@
     <a-scene embedded arjs>
       <!-- Hiroマーカー -->
       <a-marker preset="hiro">
-        <a-image 
-          src="./box.png" 
-          position="0 1.5 0" 
-          scale="5 5 5"
-          rotation="-90 0 0"
-          transparent="true">
-        </a-image>
-        
-        <a-text 
-          value="プレゼントボックス！"
-          position="1 1 1" 
-          rotation="0 0 0" 
-          align="center"
-          color="#FF0000"
-          width="10"
-          look-at="[camera]">
-        </a-text>
-        
+        <a-entity>
+          <a-image 
+            src="./box.png" 
+            position="0 1.5 0" 
+            scale="6 6 6"
+            rotation="-90 0 0"
+            transparent="true">
+          </a-image>
+        </a-entity>
+
+        <a-entity>
+          <a-text 
+            value="プレゼントだよ！"
+            position="0 2 0" 
+            rotation="0 0 0"
+            align="center"
+            color="#FF0000"
+            width="5"
+            look-at="[camera]">
+          </a-text>
+        </a-entity>
       </a-marker>
 
     
