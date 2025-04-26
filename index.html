@@ -2,35 +2,33 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>AR.js 画像と文字まとめて表示</title>
+    <title>AR.js 画像と2D文字</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://rawcdn.githack.com/jeromeetienne/ar.js/2.0.1/aframe/build/aframe-ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
       <a-marker preset="hiro">
+        <!-- プレゼントボックス画像 -->
+        <a-plane 
+          src="./box.png"
+          position="0 1 0" 
+          rotation="-90 0 0" 
+          width="1" 
+          height="1">
+        </a-plane>
+
+        <!-- 2D文字を表示 -->
+        <a-text 
+          value="メリークリスマス！" 
+          color="red" 
+          position="0 2 0"  <!-- 文字を上に配置 -->
+          scale="3 3 3"
+          align="center">
+        </a-text>
         
-        <!-- グループ化する！ -->
-        <a-entity>
-          <!-- プレゼント画像 -->
-          <a-plane 
-            src="./box.png"
-            position="1 1 0" 
-            rotation="-90 0 0" 
-            width="1" 
-            height="1"
-            transparent="true">
-          </a-plane>
-
-          <!-- 文字 -->
-          <a-entity 
-            text="value: メリークリスマス！; color: red; align: center; width: 10;"
-            position="0 2 1"
-            look-at="[camera]">
-          </a-entity>
-        </a-entity>
-
       </a-marker>
+
       <a-entity camera></a-entity>
     </a-scene>
   </body>
