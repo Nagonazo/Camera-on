@@ -10,23 +10,25 @@
     <a-scene embedded arjs>
       <a-marker preset="hiro">
        <a-entity>
-        <!-- プレゼントボックス画像 -->
-        <a-image 
+         <!-- 2D文字を表示 -->
+         <a-text 
+           value="メリークリスマス！" 
+           color="red" 
+           position="0 2 0"  <!-- 文字を上に配置 -->
+           scale="3 3 3"
+           align="center">
+         </a-text>
+      
+         <!-- プレゼントボックス画像 -->
+         <a-image 
           src="./box.png"
-          position="0 1 0" 
-          rotation="-90 0 0" 
-          width="1" 
-          height="1">
-        </a-image>
+           position="0 1 0" 
+           rotation="-90 0 0" 
+           width="5" 
+           height="3">
+         </a-image>
 
-        <!-- 2D文字を表示 -->
-        <a-text 
-          value="メリークリスマス！" 
-          color="red" 
-          position="0 2 0"  <!-- 文字を上に配置 -->
-          scale="3 3 3"
-          align="center">
-        </a-text>
+       
        </a-entity>
       </a-marker>
 
