@@ -1,37 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>AR.js 画像と2D文字</title>
+    <title>Hiroマーカーで3Dモデル表示</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://rawcdn.githack.com/jeromeetienne/ar.js/2.0.1/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://rawcdn.githack.com/AR-js-org/AR.js/3.4.2/aframe/build/aframe-ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
-      <a-marker preset="hiro">
-       <a-entity>
-         <!-- 2D文字を表示 -->
-         <a-text 
-           value="メリークリスマス！" 
-           color="red" 
-           position="0 2 0"  <!-- 文字を上に配置 -->
-           scale="3 3 3"
-           align="center">
-         </a-text>
-      
-         <!-- プレゼントボックス画像 -->
-         <a-image 
-          src="./box.png"
-           position="0 1 0" 
-           rotation="-90 0 0" 
-           width="5" 
-           height="3">
-         </a-image>
+      <!-- 3Dモデルを読み込む -->
+      <a-assets>
+        <a-asset-item id="dragon" src="Ottoman.gltf"></a-asset-item>
+      </a-assets>
 
-       
-       </a-entity>
+      <!-- Hiroマーカーに3Dモデルを表示 -->
+      <a-marker preset="hiro">
+        <a-entity 
+          gltf-model="#dragon" 
+          scale="0.5 0.5 0.5" 
+          position="0 0 0" 
+          rotation="0 0 0">
+        </a-entity>
       </a-marker>
 
+      <!-- カメラ -->
       <a-entity camera></a-entity>
     </a-scene>
   </body>
