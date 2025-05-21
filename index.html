@@ -13,15 +13,32 @@
     >
       <!-- Hiroマーカーで画像を表示 -->
       <a-marker preset="hiro">
+        
+  
+        <!-- 画像とテキストの読み込み -->
+        <a-assets>
+          <img id="box" src="box.png">
+        </a-assets>
+        
         <a-image 
-          src="box.png" 
+          src="box" 
           position="0 0 0" 
           rotation="-90 0 0" 
           scale="2 2 2"
           onclick=" window.open('box.png', '_blank')"
         ></a-image>
-      </a-marker>
 
+        <a-text
+          value="MERRYXmas！"
+          scale="20 20 20"
+          position="0 3 0"
+          color="#FFFFFF"
+          ></a-text>
+        
+      </a-marker>
+ 
+
+      
       <!-- GPS位置で画像を表示（緯度・経度は実際の場所に変更） -->
       <a-image
         src="box.png"
