@@ -13,7 +13,13 @@
     >
       <!-- Hiroマーカーで画像を表示 -->
       <a-marker preset="hiro">
-        <a-image src="box.png" position="0 0 0" rotation="-90 0 0" scale="2 2 2"></a-image>
+        <a-image 
+          src="box.png" 
+          position="0 0 0" 
+          rotation="-90 0 0" 
+          scale="2 2 2"
+          onclick=" window.open('box.png', '_blank')"
+        ></a-image>
       </a-marker>
 
       <!-- GPS位置で画像を表示（緯度・経度は実際の場所に変更） -->
